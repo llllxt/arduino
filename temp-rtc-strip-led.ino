@@ -23,10 +23,8 @@ const int buttonPin = 8;
 int mode = -1;
 char data = 0;            //Variable for storing received data
 String parseTime;
-int hr,min;
 char a[2], b[2];
 String hour,minute;
-double temperature;
 String date;
 int buttonState = 0;
 
@@ -90,17 +88,16 @@ void setup()
 void loop()
 {
 
-
+  int hr, min;
   parseTime = rtc.getTimeStr();
   hour = parseTime.substring(0,2);
   hr = hour.toInt();
- 
   minute = parseTime.substring(3,5);
   min = minute.toInt();
   date = rtc.getDOWStr();
   Serial.println(rtc.getDOWStr()); //"Wednesday"
 
-  temperature = DHT.temperature;
+  double temperature = DHT.temperature;
   int chk = DHT.read11(DHT11_PIN);
   Serial.print("Temperature = ");
   Serial.println(DHT.temperature);
@@ -112,13 +109,13 @@ void loop()
       Serial.print("\n"); 
       switch(data){
         case '1':
-          emoji_demo();
+          emoji_demo(hr,min);
           break;
         case '2':
-          temp_mode();
+          temp_mode(hr,min,temperature);
           break;
         case '3':
-          emoji_mode();
+          emoji_mode(hr,min,date);
           break;
         case '4':
           bulb_demo();
@@ -135,18 +132,18 @@ void loop()
 }
 
 
-void temp_mode(){
+void temp_mode(int hr, int min, double temperature){
   FastLED.clear();
   temp(int(temperature));
   time(hr,min);
 }
 
-void emoji_mode(){
+void emoji_mode(int hr, int min, String date){
   FastLED.clear();
   emoji(date);
   time(hr,min);
 }
-void emoji_demo(){
+void emoji_demo(int hr, int min){
   count = count % 7; 
   FastLED.clear();
   switch(count){
