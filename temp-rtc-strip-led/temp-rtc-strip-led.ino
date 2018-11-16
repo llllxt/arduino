@@ -10,15 +10,16 @@
 // For led chips like Neopixels, which have a data line, ground, and power, you just
 // need to define DATA_PIN.  For led chipsets that are SPI based (four wires - data, clock,
 // ground, and power), like the LPD8806 define both DATA_PIN and CLOCK_PIN
-#define DATA_PIN3 14
-#define DATA_PIN4 15
-#define DATA_PIN5 16
-#define DATA_PIN6 17
-#define DHT11_PIN 18
+#define DATA_PIN3 49
+#define DATA_PIN4 50
+#define DATA_PIN5 51
+#define DATA_PIN6 52
+#define DHT11_PIN 53
 #define LED_TYPE WS2812
 #define LightDodgerBlue 0x6ea8dc
 #define BRIGHTNESS 24
-char data = 0;            //Variable for storing received data
+char data;            //Variable for storing received data
+char global_data = '3';
 String parseTime;
 String hour,minute;
 String date;
@@ -45,7 +46,7 @@ void setup()
 {
 
 
-  Serial.begin(9600); //Initialize serial port & set baud rate to 9600 bits per second (bps)
+  Serial.begin(9600);
   rtc.begin();
 //  rtc.setDOW(WEDNESDAY);
 //  rtc.setTime(5, 55, 10);
@@ -59,19 +60,15 @@ void setup()
   FastLED.setBrightness(BRIGHTNESS);
 
      // Setup Serial connection
-  Serial.begin(115200);
   // Uncomment the next line if you are using an Arduino Leonardo
   //while (!Serial) {}
   
-  // Initialize the rtc object
-  rtc.begin();
 
-  // The following lines can be uncommented to set the date and time
-  //rtc.setDOW(WEDNESDAY);     // Set Day-of-Week to SUNDAY
-  //rtc.setTime(12, 0, 0);     // Set the time to 12:00:00 (24hr format)
-  //rtc.setDate(1, 1, 2014);   // Set the date to January 1st, 2014
-  
-  for (int i=2; i<=44; i++) {
+  for (int i=2; i<=19; i++) {
+    pinMode(i, OUTPUT);
+
+}
+for (int i=22; i<=48; i++) {
     pinMode(i, OUTPUT);
 
 }
@@ -88,19 +85,30 @@ void loop()
   minute = parseTime.substring(3,5);
   min = minute.toInt();
   date = rtc.getDOWStr();
-  Serial.println(rtc.getDOWStr()); //"Wednesday"
+  //Serial.println(rtc.getDOWStr()); //"Wednesday"
 
   double temperature = DHT.temperature;
   int chk = DHT.read11(DHT11_PIN);
   Serial.print("Temperature = ");
   Serial.println(DHT.temperature);
 
-  if(Serial.available() > 0)      // Send data only when you receive data:
-   {
-      data = Serial.read();        //Read the incoming data & store into data
-      Serial.print(data);          //Print Value inside data in Serial monitor
+  
+      data = Serial.read();
+      if(data == '1' || data == '2' || data == '3' || data == '4'){
+        global_data = data;
+      }
+      Serial.print(global_data);          //Print Value inside data in Serial monitor
       Serial.print("\n"); 
-      switch(data){
+      mode(global_data, hr, min, temperature, date);
+  
+  // Wait one second before repeating
+  delay (1000);
+
+
+}
+
+void mode(char mode_num, int hr, int min, int temperature, String date){
+  switch(mode_num){
         case '1':
           emoji_demo(hr,min);
           break;
@@ -111,17 +119,11 @@ void loop()
           emoji_mode(hr,min,date);
           break;
         case '4':
-          bulb_demo();
+          bulb_demo(hr,min,temperature,date);
           break;
         
-      }
+      
   }
-
-  
-  // Wait one second before repeating
-  delay (1000);
-
-
 }
 
 
@@ -167,10 +169,19 @@ void emoji_demo(int hr, int min){
   time(hr,min);
 }
 
-void bulb_demo(){
-
-  int sec = 0, min = 0;
+void bulb_demo(int h, int m, int t, String d){
+      
+  int sec = 0, min = 1;
+  
   for (sec=0; sec<=60; sec ++) {
+    time(min,sec);
+    data = Serial.read();
+      if(data == '1' || data == '2' || data == '3' || data == '4'){
+        global_data = data;
+        break;
+      }
+      
+    
     if (sec==60) {
       sec = 0;
       min++;
@@ -179,7 +190,8 @@ void bulb_demo(){
       }
     }
     
-  time(min,sec);
+  
+  delay(1000);
   
   
 }
@@ -1490,7 +1502,7 @@ void time(int hr, int min){
       }
     }
   }
-  
+
   
   
   
@@ -2595,5 +2607,4 @@ if (min==34) {
       digitalWrite( i, HIGH);
     }
   }
-
 }
