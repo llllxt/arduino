@@ -10,23 +10,18 @@
 // For led chips like Neopixels, which have a data line, ground, and power, you just
 // need to define DATA_PIN.  For led chipsets that are SPI based (four wires - data, clock,
 // ground, and power), like the LPD8806 define both DATA_PIN and CLOCK_PIN
-#define DATA_PIN3 3
-#define DATA_PIN4 4
-#define DATA_PIN5 5
-#define DATA_PIN6 6
-#define CLOCK_PIN 2
-#define DHT11_PIN 7
+#define DATA_PIN3 14
+#define DATA_PIN4 15
+#define DATA_PIN5 16
+#define DATA_PIN6 17
+#define DHT11_PIN 18
 #define LED_TYPE WS2812
 #define LightDodgerBlue 0x6ea8dc
 #define BRIGHTNESS 24
-const int buttonPin = 8;
-int mode = -1;
 char data = 0;            //Variable for storing received data
 String parseTime;
-char a[2], b[2];
 String hour,minute;
 String date;
-int buttonState = 0;
 
 // Define the array of leds
 CRGB leds1[NUM_LEDS];
@@ -62,8 +57,6 @@ void setup()
   FastLED.addLeds<WS2812, DATA_PIN5, GRB>(leds3, NUM_LEDS);
   FastLED.addLeds<WS2812, DATA_PIN6, GRB>(leds4, NUM_LEDS);
   FastLED.setBrightness(BRIGHTNESS);
-  //button
-  pinMode(buttonPin, INPUT);
 
      // Setup Serial connection
   Serial.begin(115200);
@@ -1398,74 +1391,74 @@ for(int i=0; i < sizeof(index4)/sizeof(index4[0]); i++){
 void time(int hr, int min){
 
   
-  //for hours
+   //for hours
     if (hr==1 || hr==13) {
-    for(int i = 33; i<=44; i++){
-      if(i ==33){
+    for(int i = 2; i<=13; i++){
+      if(i ==2){
           digitalWrite(i, LOW);
       }else{
           digitalWrite(i, HIGH);
       }
     }
   } else if (hr==2 || hr==14) {
-    for(int i = 33; i<=44; i++){
-      if(i ==34){
+    for(int i = 2; i<=13; i++){
+      if(i ==3){
           digitalWrite(i, LOW);
       }else{
           digitalWrite(i, HIGH);
       }
     }
   } else if (hr==3 || hr==15) {
-    for(int i = 33; i<=44; i++){
-      if(i ==35){
+    for(int i = 2; i<=13; i++){
+      if(i ==4){
           digitalWrite(i, LOW);
       }else{
           digitalWrite(i, HIGH);
       }
     }
-  } else if (hr==4 || hr==16) {
-    for(int i = 33; i<=44; i++){
-      if(i ==36){
+  } else if (hr==4|| hr==16) {
+    for(int i = 2; i<=13; i++){
+      if(i ==5){
           digitalWrite(i, LOW);
       }else{
           digitalWrite(i, HIGH);
       }
     }
   } else if (hr==5 || hr==17) {
-    for(int i = 33; i<=44; i++){
-      if(i ==37){
+    for(int i = 2; i<=13; i++){
+      if(i ==6){
           digitalWrite(i, LOW);
       }else{
           digitalWrite(i, HIGH);
       }
     }
   } else if (hr==6 || hr==18) {
-    for(int i = 33; i<=44; i++){
-      if(i ==38){
+    for(int i = 2; i<=13; i++){
+      if(i ==7){
           digitalWrite(i, LOW);
       }else{
           digitalWrite(i, HIGH);
       }
     }
   } else if (hr==7 || hr==19) {
-    for(int i = 33; i<=44; i++){
-      if(i ==39){
+    for(int i = 2; i<=13; i++){
+      if(i ==8){
           digitalWrite(i, LOW);
       }else{
           digitalWrite(i, HIGH);
       }
     }
   } else if (hr==8 || hr==20) {
-    for(int i = 33; i<=44; i++){
-      if(i ==40){
+    for(int i = 2; i<=13; i++){
+      if(i ==9){
           digitalWrite(i, LOW);
       }else{
           digitalWrite(i, HIGH);
       }
     }
   } else if (hr==9 || hr==21) {
-   for(int i = 33; i<=44; i++){
-      if(i ==41){
+   for(int i = 2; i<=13; i++){
+      if(i ==10){
           digitalWrite(i, LOW);
       }else{
           digitalWrite(i, HIGH);
@@ -1473,24 +1466,24 @@ void time(int hr, int min){
     }
     digitalWrite(44, HIGH); 
   } else if (hr==10 || hr==22) {
-    for(int i = 33; i<=44; i++){
-      if(i == 42){
+    for(int i = 2; i<=13; i++){
+      if(i == 11){
           digitalWrite(i, LOW);
       }else{
           digitalWrite(i, HIGH);
       }
     }
   } else if (hr==11 || hr==23) {
-    for(int i = 33; i<=44; i++){
-      if(i ==43){
+    for(int i = 2; i<=13; i++){
+      if(i ==12){
           digitalWrite(i, LOW);
       }else{
           digitalWrite(i, HIGH);
       }
     }
   } else if (hr==12 || hr==24) {
-    for(int i = 33; i<=44; i++){
-      if(i ==44){
+    for(int i = 2; i<=13; i++){
+      if(i ==13){
           digitalWrite(i, LOW);
       }else{
           digitalWrite(i, HIGH);
@@ -1499,981 +1492,1030 @@ void time(int hr, int min){
   }
   
   
+  
+  
 /*
-pin 2  3  4 DMUX1
+pin 22  23  24 DMUX1
     A2 A1 A0
-pin 5  6  7 DMUX2
+pin 25  26  27 DMUX2
     A2 A1 A0
-pin 8  9  10 DMUX3
+pin 28  29  30 DMUX3
     A2 A1 A0
-pin 11 12 13 DMUX4
+pin 31 32 33 DMUX4
     A2 A1 A0
-pin 14 15 16 DMUX5
+pin 34 35 36 DMUX5
     A2 A1 A0
-pin 17 18 19 DMUX6
+pin 37 38 39 DMUX6
     A2 A1 A0
-pin 20 21 22 DMUX7
+pin 40 41 42 DMUX7
     A2 A1 A0
-pin 23 24 25 DMUX8
+pin 43 44 45 DMUX8
     A2 A1 A0
-pin 26 27 28 DMUX9
+pin 46 47 48 DMUX9
     A2 A1 A0
 */
-  // for demo
+  // for min
   
     if (min==0) {
-    for(int i=2; i<=4; i++){
+    for(int i=22; i<=24; i++){
       digitalWrite( i, LOW);
     }
     
-    for(int i =5; i<=28; i++){
+    for(int i =25; i<=48; i++){
       digitalWrite( i, HIGH);
     }
     
   }
   if (min==1) {
-    for(int i=2; i<=7; i++){
+    for(int i=22; i<=27; i++){
       digitalWrite( i, LOW);
     }
-    for(int i =8; i<=28; i++){
+    for(int i =28; i<=48; i++){
       digitalWrite( i, HIGH);
     }
     
   }
   if (min==2) {
-    for(int i=2; i<=10; i++){
+    for(int i=22; i<=30; i++){
       digitalWrite( i, LOW);
     }
-     for(int i=11; i<=28; i++){
+     for(int i=31; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
   if (min==3) {
-    for(int i=2; i<=13; i++){
+    for(int i=22; i<=33; i++){
       digitalWrite( i, LOW);
     }
-     for(int i=14; i<=28; i++){
+     for(int i=34; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
   if (min==4) {
-    for(int i=2; i<=16; i++){
+    for(int i=22; i<=36; i++){
       digitalWrite( i, LOW);
     }
-     for(int i=17; i<=28; i++){
+     for(int i=37; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
   if (min==5) {
-    for(int i=2; i<=19; i++){
+    for(int i=22; i<=39; i++){
       digitalWrite( i, LOW);
     }
-     for(int i=20; i<=28; i++){
+     for(int i=40; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
   if (min==6) {
-    for(int i=2; i<=22; i++){
+    for(int i=22; i<=42; i++){
       digitalWrite( i, LOW);
     }
-    for(int i=23; i<=28; i++){
+    for(int i=43; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
   if (min==7) {
-    for(int i=2; i<=25; i++){
+    for(int i=22; i<=45; i++){
       digitalWrite( i, LOW);
     }
-    for(int i=26; i<=28; i++){
+    for(int i=46; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
   if (min==8) {
-    for(int i=2; i<=13; i++){
+    for(int i=22; i<=33; i++){
       digitalWrite( i, HIGH);
     }
-    for(int i=14; i<=28; i++){
+    for(int i=34; i<=48; i++){
       digitalWrite( i, LOW);
     }
   }
   if (min==9) {
-    digitalWrite( 2, LOW);
-    digitalWrite( 3, LOW);
-    for(int i=4; i<=16; i++){
+    digitalWrite( 22, LOW);
+    digitalWrite( 23, LOW);
+    for(int i=24; i<=36; i++){
       digitalWrite( i, HIGH);
     }
-    for(int i=17; i<=28; i++){
+    for(int i=37; i<=48; i++){
       digitalWrite( i, LOW);
     }
   }
   if (min==10) {
-    digitalWrite( 2, LOW);
-    digitalWrite( 3, LOW);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, LOW);
-    digitalWrite( 6, LOW);
-    for(int i=7; i<=19; i++){
+    digitalWrite( 22, LOW);
+    digitalWrite( 23, LOW);
+    digitalWrite( 24, HIGH);
+    digitalWrite( 25, LOW);
+    digitalWrite( 26, LOW);
+    for(int i=27; i<=39; i++){
       digitalWrite( i, HIGH);
     }
-    for(int i=20; i<=28; i++){
+    for(int i=40; i<=48; i++){
       digitalWrite( i, LOW);
     }
   }
   if (min==11) {
-    digitalWrite( 2, LOW);
-    digitalWrite( 3, LOW);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, LOW);
-    digitalWrite( 6, LOW);
-    digitalWrite( 7, HIGH);
-    digitalWrite( 8, LOW);
-    digitalWrite( 9, LOW);
-    for(int i=10; i<=22; i++){
+    digitalWrite( 22, LOW);
+    digitalWrite( 23, LOW);
+    digitalWrite( 24, HIGH);
+    digitalWrite( 25, LOW);
+    digitalWrite( 26, LOW);
+    digitalWrite( 27, HIGH);
+    digitalWrite( 28, LOW);
+    digitalWrite( 29, LOW);
+    for(int i=30; i<=42; i++){
       digitalWrite( i, HIGH);
     }
-    for(int i=23; i<=28; i++){
+    for(int i=43; i<=48; i++){
       digitalWrite( i, LOW);
     }
   }
   if (min==12) {
-    digitalWrite( 2, LOW);
-    digitalWrite( 3, LOW);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, LOW);
-    digitalWrite( 6, LOW);
-    digitalWrite( 7, HIGH);
-    digitalWrite( 8, LOW);
-    digitalWrite( 9, LOW);
-    digitalWrite( 10, HIGH);
-    digitalWrite( 11, LOW);
-    digitalWrite( 12, LOW);
-    for(int i=13; i<=25; i++){
+    digitalWrite( 22, LOW);
+    digitalWrite( 23, LOW);
+    digitalWrite( 24, HIGH);
+    digitalWrite( 25, LOW);
+    digitalWrite( 26, LOW);
+    digitalWrite( 27, HIGH);
+    digitalWrite( 28, LOW);
+    digitalWrite( 29, LOW);
+    digitalWrite( 30, HIGH);
+    digitalWrite( 31, LOW);
+    digitalWrite( 32, LOW);
+    for(int i=33; i<=45; i++){
       digitalWrite( i, HIGH);
     }
-    for(int i=26; i<=28; i++){
+    for(int i=46; i<=48; i++){
       digitalWrite( i, LOW);
     }
   }
   if (min==13) {
-    digitalWrite( 2, LOW);
-    digitalWrite( 3, LOW);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, LOW);
-    digitalWrite( 6, LOW);
-    digitalWrite( 7, HIGH);
-    digitalWrite( 8, LOW);
-    digitalWrite( 9, LOW);
-    digitalWrite( 10, HIGH);
-    digitalWrite( 11, LOW);
-    digitalWrite( 12, LOW);
-    digitalWrite( 13, HIGH);
-    digitalWrite( 14, LOW);
-    digitalWrite( 15, LOW); 
-    for(int i=16; i<=28; i++){
+    digitalWrite( 22, LOW);
+    digitalWrite( 23, LOW);
+    digitalWrite( 24, HIGH);
+    digitalWrite( 25, LOW);
+    digitalWrite( 26, LOW);
+    digitalWrite( 27, HIGH);
+    digitalWrite( 28, LOW);
+    digitalWrite( 29, LOW);
+    digitalWrite( 30, HIGH);
+    digitalWrite( 31, LOW);
+    digitalWrite( 32, LOW);
+    digitalWrite( 33, HIGH);
+    digitalWrite( 34, LOW);
+    digitalWrite( 35, LOW); 
+    for(int i=36; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
   if (min==14) {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, LOW);
-    digitalWrite( 6, LOW);
-    digitalWrite( 7, HIGH);
-    digitalWrite( 8, LOW);
-    digitalWrite( 9, LOW);
-    digitalWrite( 10, HIGH);
-    digitalWrite( 11, LOW);
-    digitalWrite( 12, LOW);
-    digitalWrite( 13, HIGH);
-    digitalWrite( 14, LOW);
-    digitalWrite( 15, LOW); 
-    digitalWrite( 16, HIGH);
-    digitalWrite( 17, LOW);
-    digitalWrite( 18, LOW);
-    for(int i=19; i<=28; i++){
+    digitalWrite( 22, HIGH);
+    digitalWrite( 23, HIGH);
+    digitalWrite( 24, HIGH);
+    digitalWrite( 25, LOW);
+    digitalWrite( 26, LOW);
+    digitalWrite( 27, HIGH);
+    digitalWrite( 28, LOW);
+    digitalWrite( 29, LOW);
+    digitalWrite( 30, HIGH);
+    digitalWrite( 31, LOW);
+    digitalWrite( 32, LOW);
+    digitalWrite( 33, HIGH);
+    digitalWrite( 34, LOW);
+    digitalWrite( 35, LOW); 
+    digitalWrite( 36, HIGH);
+    digitalWrite( 37, LOW);
+    digitalWrite( 38, LOW);
+    for(int i=39; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
   if (min==15) {
-    for(int i=2; i<=7; i++){
+    for(int i=22; i<=27; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 8, LOW);
-    digitalWrite( 9, LOW);
-    digitalWrite( 10, HIGH);
-    digitalWrite( 11, LOW);
-    digitalWrite( 12, LOW);
-    digitalWrite( 13, HIGH);
-    digitalWrite( 14, LOW);
-    digitalWrite( 15, LOW); 
-    digitalWrite( 16, HIGH);
-    digitalWrite( 17, LOW);
-    digitalWrite( 18, LOW);
-    digitalWrite( 19, HIGH);
-    digitalWrite( 20, LOW);
-    digitalWrite( 21, LOW);
-    for(int i=22; i<=28; i++){
+    digitalWrite( 28, LOW);
+    digitalWrite( 29, LOW);
+    digitalWrite( 30, HIGH);
+    digitalWrite( 31, LOW);
+    digitalWrite( 32, LOW);
+    digitalWrite( 33, HIGH);
+    digitalWrite( 34, LOW);
+    digitalWrite( 35, LOW); 
+    digitalWrite( 36, HIGH);
+    digitalWrite( 37, LOW);
+    digitalWrite( 38, LOW);
+    digitalWrite( 39, HIGH);
+    digitalWrite( 40, LOW);
+    digitalWrite( 41, LOW);
+    for(int i=42; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
   if (min==16) {
-    for(int i=2; i<=10; i++){
+    for(int i=22; i<=30; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 11, LOW);
-    digitalWrite( 12, LOW);
-    digitalWrite( 13, HIGH);
-    digitalWrite( 14, LOW);
-    digitalWrite( 15, LOW); 
-    digitalWrite( 16, HIGH);
-    digitalWrite( 17, LOW);
-    digitalWrite( 18, LOW);
-    digitalWrite( 19, HIGH);
-    digitalWrite( 20, LOW);
-    digitalWrite( 21, LOW);
-    digitalWrite( 22, HIGH);
-    digitalWrite( 23, LOW);
-    digitalWrite( 24, LOW);
-    for(int i=25; i<=28; i++){
+    digitalWrite( 31, LOW);
+    digitalWrite( 32, LOW);
+    digitalWrite( 33, HIGH);
+    digitalWrite( 34, LOW);
+    digitalWrite( 35, LOW); 
+    digitalWrite( 36, HIGH);
+    digitalWrite( 37, LOW);
+    digitalWrite( 38, LOW);
+    digitalWrite( 39, HIGH);
+    digitalWrite( 40, LOW);
+    digitalWrite( 41, LOW);
+    digitalWrite( 42, HIGH);
+    digitalWrite( 43, LOW);
+    digitalWrite( 44, LOW);
+    for(int i=45; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
   if (min==17) {
-    for(int i=2; i<=13; i++){
+    for(int i=22; i<=33; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 14, LOW);
-    digitalWrite( 15, LOW); 
-    digitalWrite( 16, HIGH);
-    digitalWrite( 17, LOW);
-    digitalWrite( 18, LOW);
-    digitalWrite( 19, HIGH);
-    digitalWrite( 20, LOW);
-    digitalWrite( 21, LOW);
-    digitalWrite( 22, HIGH);
-    digitalWrite( 23, LOW);
-    digitalWrite( 24, LOW);
-    digitalWrite( 25, HIGH);
-    digitalWrite( 26, LOW);
-    digitalWrite( 27, LOW);
-    digitalWrite( 28, HIGH);
+    digitalWrite( 34, LOW);
+    digitalWrite( 35, LOW); 
+    digitalWrite( 36, HIGH);
+    digitalWrite( 37, LOW);
+    digitalWrite( 38, LOW);
+    digitalWrite( 39, HIGH);
+    digitalWrite( 40, LOW);
+    digitalWrite( 41, LOW);
+    digitalWrite( 42, HIGH);
+    digitalWrite( 43, LOW);
+    digitalWrite( 44, LOW);
+    digitalWrite( 45, HIGH);
+    digitalWrite( 46, LOW);
+    digitalWrite( 47, LOW);
+    digitalWrite( 48, HIGH);
   }
   if (min==18) {
-    digitalWrite( 2, LOW);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, LOW);
-    for(int i=5; i<=16; i++){
+    digitalWrite( 22, LOW);
+    digitalWrite( 23, HIGH);
+    digitalWrite( 24, LOW);
+    for(int i=25; i<=36; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 17, LOW);
-    digitalWrite( 18, LOW);
-    digitalWrite( 19, HIGH);
-    digitalWrite( 20, LOW);
-    digitalWrite( 21, LOW);
-    digitalWrite( 22, HIGH);
-    digitalWrite( 23, LOW);
-    digitalWrite( 24, LOW);
-    digitalWrite( 25, HIGH);
-    digitalWrite( 26, LOW);
-    digitalWrite( 27, LOW);
-    digitalWrite( 28, HIGH);
+    digitalWrite( 37, LOW);
+    digitalWrite( 38, LOW);
+    digitalWrite( 39, HIGH);
+    digitalWrite( 40, LOW);
+    digitalWrite( 41, LOW);
+    digitalWrite( 42, HIGH);
+    digitalWrite( 43, LOW);
+    digitalWrite( 44, LOW);
+    digitalWrite( 45, HIGH);
+    digitalWrite( 46, LOW);
+    digitalWrite( 47, LOW);
+    digitalWrite( 48, HIGH);
   }
   if (min==19) {
-    digitalWrite( 2, LOW);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, LOW);
-    digitalWrite( 5, LOW);
-    digitalWrite( 6, HIGH);
-    digitalWrite( 7, LOW);
-    for(int i=8; i<=19; i++){
+    digitalWrite( 22, LOW);
+    digitalWrite( 23, HIGH);
+    digitalWrite( 24, LOW);
+    digitalWrite( 25, LOW);
+    digitalWrite( 26, HIGH);
+    digitalWrite( 27, LOW);
+    for(int i=28; i<=39; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 20, LOW);
-    digitalWrite( 21, LOW);
-    digitalWrite( 22, HIGH);
-    digitalWrite( 23, LOW);
-    digitalWrite( 24, LOW);
-    digitalWrite( 25, HIGH);
-    digitalWrite( 26, LOW);
-    digitalWrite( 27, LOW);
-    digitalWrite( 28, HIGH);
+    digitalWrite( 40, LOW);
+    digitalWrite( 41, LOW);
+    digitalWrite( 42, HIGH);
+    digitalWrite( 43, LOW);
+    digitalWrite( 44, LOW);
+    digitalWrite( 45, HIGH);
+    digitalWrite( 46, LOW);
+    digitalWrite( 47, LOW);
+    digitalWrite( 48, HIGH);
   }
   if (min==20) {
-    digitalWrite( 2, LOW);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, LOW);
-    digitalWrite( 5, LOW);
-    digitalWrite( 6, HIGH);
-    digitalWrite( 7, LOW);
-    digitalWrite( 8, LOW);
-    digitalWrite( 9, HIGH);
-    digitalWrite( 10, LOW);
-    for(int i=11; i<=22; i++){
+    digitalWrite( 22, LOW);
+    digitalWrite( 23, HIGH);
+    digitalWrite( 24, LOW);
+    digitalWrite( 25, LOW);
+    digitalWrite( 26, HIGH);
+    digitalWrite( 27, LOW);
+    digitalWrite( 28, LOW);
+    digitalWrite( 29, HIGH);
+    digitalWrite( 30, LOW);
+    for(int i=31; i<=42; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 23, LOW);
-    digitalWrite( 24, LOW);
-    digitalWrite( 25, HIGH);
-    digitalWrite( 26, LOW);
-    digitalWrite( 27, LOW);
-    digitalWrite( 28, HIGH);
+    digitalWrite( 43, LOW);
+    digitalWrite( 44, LOW);
+    digitalWrite( 45, HIGH);
+    digitalWrite( 46, LOW);
+    digitalWrite( 47, LOW);
+    digitalWrite( 48, HIGH);
   }
   if (min==21) {
-    digitalWrite( 2, LOW);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, LOW);
-    digitalWrite( 5, LOW);
-    digitalWrite( 6, HIGH);
-    digitalWrite( 7, LOW);
-    digitalWrite( 8, LOW);
-    digitalWrite( 9, HIGH);
-    digitalWrite( 10, LOW);
-    digitalWrite( 11, LOW);
-    digitalWrite( 12, HIGH);
-    digitalWrite( 13, LOW);
-    for(int i=14; i<=25; i++){
+    digitalWrite( 22, LOW);
+    digitalWrite( 23, HIGH);
+    digitalWrite( 24, LOW);
+    digitalWrite( 25, LOW);
+    digitalWrite( 26, HIGH);
+    digitalWrite( 27, LOW);
+    digitalWrite( 28, LOW);
+    digitalWrite( 29, HIGH);
+    digitalWrite( 30, LOW);
+    digitalWrite( 31, LOW);
+    digitalWrite( 32, HIGH);
+    digitalWrite( 33, LOW);
+    for(int i=34; i<=45; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 26, LOW);
-    digitalWrite( 27, LOW);
-    digitalWrite( 28, HIGH);
+    digitalWrite( 46, LOW);
+    digitalWrite( 47, LOW);
+    digitalWrite( 48, HIGH);
   }
   if (min==22) {
-    digitalWrite( 2, LOW);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, LOW);
-    digitalWrite( 5, LOW);
-    digitalWrite( 6, HIGH);
-    digitalWrite( 7, LOW);
-    digitalWrite( 8, LOW);
-    digitalWrite( 9, HIGH);
-    digitalWrite( 10, LOW);
-    digitalWrite( 11, LOW);
-    digitalWrite( 12, HIGH);
-    digitalWrite( 13, LOW);
-    digitalWrite( 14, LOW);
-    digitalWrite( 15, HIGH); 
-    digitalWrite( 16, LOW);
-    for(int i=17; i<=28; i++){
+    digitalWrite( 22, LOW);
+    digitalWrite( 23, HIGH);
+    digitalWrite( 24, LOW);
+    digitalWrite( 25, LOW);
+    digitalWrite( 26, HIGH);
+    digitalWrite( 27, LOW);
+    digitalWrite( 28, LOW);
+    digitalWrite( 29, HIGH);
+    digitalWrite( 30, LOW);
+    digitalWrite( 31, LOW);
+    digitalWrite( 32, HIGH);
+    digitalWrite( 33, LOW);
+    digitalWrite( 34, LOW);
+    digitalWrite( 35, HIGH); 
+    digitalWrite( 36, LOW);
+    for(int i=37; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
   if (min==23) {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, LOW);
-    digitalWrite( 6, HIGH);
-    digitalWrite( 7, LOW);
-    digitalWrite( 8, LOW);
-    digitalWrite( 9, HIGH);
-    digitalWrite( 10, LOW);
-    digitalWrite( 11, LOW);
-    digitalWrite( 12, HIGH);
-    digitalWrite( 13, LOW);
-    digitalWrite( 14, LOW);
-    digitalWrite( 15, HIGH); 
-    digitalWrite( 16, LOW);
-    digitalWrite( 17, LOW);
-    digitalWrite( 18, HIGH);
-    digitalWrite( 19, LOW);
-    for(int i=20; i<=28; i++){
+    digitalWrite( 22, HIGH);
+    digitalWrite( 23, HIGH);
+    digitalWrite( 24, HIGH);
+    digitalWrite( 25, LOW);
+    digitalWrite( 26, HIGH);
+    digitalWrite( 27, LOW);
+    digitalWrite( 28, LOW);
+    digitalWrite( 29, HIGH);
+    digitalWrite( 30, LOW);
+    digitalWrite( 31, LOW);
+    digitalWrite( 32, HIGH);
+    digitalWrite( 33, LOW);
+    digitalWrite( 34, LOW);
+    digitalWrite( 35, HIGH); 
+    digitalWrite( 36, LOW);
+    digitalWrite( 37, LOW);
+    digitalWrite( 38, HIGH);
+    digitalWrite( 39, LOW);
+    for(int i=40; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
   if (min==24) {
-    for(int i=2; i<=7; i++){
+    for(int i=22; i<=27; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 8, LOW);
-    digitalWrite( 9, HIGH);
-    digitalWrite( 10, LOW);
-    digitalWrite( 11, LOW);
-    digitalWrite( 12, HIGH);
-    digitalWrite( 13, LOW);
-    digitalWrite( 14, LOW);
-    digitalWrite( 15, HIGH); 
-    digitalWrite( 16, LOW);
-    digitalWrite( 17, LOW);
-    digitalWrite( 18, HIGH);
-    digitalWrite( 19, LOW);
-    digitalWrite( 20, LOW);
-    digitalWrite( 21, HIGH);
-    digitalWrite( 22, LOW);
-    for(int i=23; i<=28; i++){
+    digitalWrite( 28, LOW);
+    digitalWrite( 29, HIGH);
+    digitalWrite( 30, LOW);
+    digitalWrite( 31, LOW);
+    digitalWrite( 32, HIGH);
+    digitalWrite( 33, LOW);
+    digitalWrite( 34, LOW);
+    digitalWrite( 35, HIGH); 
+    digitalWrite( 36, LOW);
+    digitalWrite( 37, LOW);
+    digitalWrite( 38, HIGH);
+    digitalWrite( 39, LOW);
+    digitalWrite( 40, LOW);
+    digitalWrite( 41, HIGH);
+    digitalWrite( 42, LOW);
+    for(int i=43; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
   if (min==25) {
-    for(int i=2; i<=10; i++){
+    for(int i=22; i<=30; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 11, LOW);
-    digitalWrite( 12, HIGH);
-    digitalWrite( 13, LOW);
-    digitalWrite( 14, LOW);
-    digitalWrite( 15, HIGH); 
-    digitalWrite( 16, LOW);
-    digitalWrite( 17, LOW);
-    digitalWrite( 18, HIGH);
-    digitalWrite( 19, LOW);
-    digitalWrite( 20, LOW);
-    digitalWrite( 21, HIGH);
-    digitalWrite( 22, LOW);
-    digitalWrite( 23, LOW);
-    digitalWrite( 24, HIGH);
-    digitalWrite( 25, LOW);
-    digitalWrite( 26, HIGH);
-    digitalWrite( 27, HIGH);
-    digitalWrite( 28, HIGH);
+    digitalWrite( 31, LOW);
+    digitalWrite( 32, HIGH);
+    digitalWrite( 33, LOW);
+    digitalWrite( 34, LOW);
+    digitalWrite( 35, HIGH); 
+    digitalWrite( 36, LOW);
+    digitalWrite( 37, LOW);
+    digitalWrite( 38, HIGH);
+    digitalWrite( 39, LOW);
+    digitalWrite( 40, LOW);
+    digitalWrite( 41, HIGH);
+    digitalWrite( 42, LOW);
+    digitalWrite( 43, LOW);
+    digitalWrite( 44, HIGH);
+    digitalWrite( 45, LOW);
+    digitalWrite( 46, HIGH);
+    digitalWrite( 47, HIGH);
+    digitalWrite( 48, HIGH);
   }
   if (min==26) {
-    for(int i=2; i<=13; i++){
+    for(int i=22; i<=33; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 14, LOW);
-    digitalWrite( 15, HIGH); 
-    digitalWrite( 16, LOW);
-    digitalWrite( 17, LOW);
-    digitalWrite( 18, HIGH);
-    digitalWrite( 19, LOW);
-    digitalWrite( 20, LOW);
-    digitalWrite( 21, HIGH);
-    digitalWrite( 22, LOW);
-    digitalWrite( 23, LOW);
-    digitalWrite( 24, HIGH);
-    digitalWrite( 25, LOW);
-    digitalWrite( 26, LOW);
-    digitalWrite( 27, HIGH);
-    digitalWrite( 28, LOW);
+    digitalWrite( 34, LOW);
+    digitalWrite( 35, HIGH); 
+    digitalWrite( 36, LOW);
+    digitalWrite( 37, LOW);
+    digitalWrite( 38, HIGH);
+    digitalWrite( 39, LOW);
+    digitalWrite( 40, LOW);
+    digitalWrite( 41, HIGH);
+    digitalWrite( 42, LOW);
+    digitalWrite( 43, LOW);
+    digitalWrite( 44, HIGH);
+    digitalWrite( 45, LOW);
+    digitalWrite( 46, LOW);
+    digitalWrite( 47, HIGH);
+    digitalWrite( 48, LOW);
   }
   if (min==27) {
-    digitalWrite( 2, LOW);
-    for(int i=3; i<=16; i++){
+    digitalWrite( 22, LOW);
+    for(int i=23; i<=36; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 17, LOW);
-    digitalWrite( 18, HIGH);
-    digitalWrite( 19, LOW);
-    digitalWrite( 20, LOW);
-    digitalWrite( 21, HIGH);
-    digitalWrite( 22, LOW);
-    digitalWrite( 23, LOW);
-    digitalWrite( 24, HIGH);
-    digitalWrite( 25, LOW);
-    digitalWrite( 26, LOW);
-    digitalWrite( 27, HIGH);
-    digitalWrite( 28, LOW);
+    digitalWrite( 37, LOW);
+    digitalWrite( 38, HIGH);
+    digitalWrite( 39, LOW);
+    digitalWrite( 40, LOW);
+    digitalWrite( 41, HIGH);
+    digitalWrite( 42, LOW);
+    digitalWrite( 43, LOW);
+    digitalWrite( 44, HIGH);
+    digitalWrite( 45, LOW);
+    digitalWrite( 46, LOW);
+    digitalWrite( 47, HIGH);
+    digitalWrite( 48, LOW);
   }
   if (min==28) {
-    digitalWrite( 2, LOW);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, LOW);
-    for(int i=6; i<=19; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 20, LOW);
-    digitalWrite( 21, HIGH);
     digitalWrite( 22, LOW);
-    digitalWrite( 23, LOW);
+    digitalWrite( 23, HIGH);
     digitalWrite( 24, HIGH);
     digitalWrite( 25, LOW);
-    digitalWrite( 26, LOW);
-    digitalWrite( 27, HIGH);
-    digitalWrite( 28, LOW);
+    for(int i=26; i<=39; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 40, LOW);
+    digitalWrite( 41, HIGH);
+    digitalWrite( 42, LOW);
+    digitalWrite( 43, LOW);
+    digitalWrite( 44, HIGH);
+    digitalWrite( 45, LOW);
+    digitalWrite( 46, LOW);
+    digitalWrite( 47, HIGH);
+    digitalWrite( 48, LOW);
   }
   if (min==29) {
-    digitalWrite( 2, LOW);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, LOW);
-    digitalWrite( 6, HIGH);
-    digitalWrite( 7, HIGH);
-    digitalWrite( 8, LOW);
-    for(int i=9; i<=22; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 23, LOW);
+    digitalWrite( 22, LOW);
+    digitalWrite( 23, HIGH);
     digitalWrite( 24, HIGH);
     digitalWrite( 25, LOW);
-    digitalWrite( 26, LOW);
+    digitalWrite( 26, HIGH);
     digitalWrite( 27, HIGH);
     digitalWrite( 28, LOW);
+    for(int i=29; i<=42; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 43, LOW);
+    digitalWrite( 44, HIGH);
+    digitalWrite( 45, LOW);
+    digitalWrite( 46, LOW);
+    digitalWrite( 47, HIGH);
+    digitalWrite( 48, LOW);
   }
   if (min==30) {
-    digitalWrite( 2, LOW);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, LOW);
-    digitalWrite( 6, HIGH);
-    digitalWrite( 7, HIGH);
-    digitalWrite( 8, LOW);
-    digitalWrite( 9, HIGH);
-    digitalWrite( 10, HIGH);
-    digitalWrite( 11, LOW);
-    for(int i=12; i<=25; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 26, LOW);
+    digitalWrite( 22, LOW);
+    digitalWrite( 23, HIGH);
+    digitalWrite( 24, HIGH);
+    digitalWrite( 25, LOW);
+    digitalWrite( 26, HIGH);
     digitalWrite( 27, HIGH);
     digitalWrite( 28, LOW);
-  }
-  if (min=="31") {
-    digitalWrite( 2, LOW);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, LOW);
-    digitalWrite( 6, HIGH);
-    digitalWrite( 7, HIGH);
-    digitalWrite( 8, LOW);
-    digitalWrite( 9, HIGH);
-    digitalWrite( 10, HIGH);
-    digitalWrite( 11, LOW);
-    digitalWrite( 12, HIGH);
-    digitalWrite( 13, HIGH);
-    digitalWrite( 14, LOW);
-    for(int i=15; i<=28; i++){
+    digitalWrite( 29, HIGH);
+    digitalWrite( 30, HIGH);
+    digitalWrite( 31, LOW);
+    for(int i=32; i<=45; i++){
       digitalWrite( i, HIGH);
     }
+    digitalWrite( 46, LOW);
+    digitalWrite( 47, HIGH);
+    digitalWrite( 48, LOW);
   }
-  if (min=="32") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, LOW);
-    digitalWrite( 6, HIGH);
-    digitalWrite( 7, HIGH);
-    digitalWrite( 8, LOW);
-    digitalWrite( 9, HIGH);
-    digitalWrite( 10, HIGH);
-    digitalWrite( 11, LOW);
-    digitalWrite( 12, HIGH);
-    digitalWrite( 13, HIGH);
-    digitalWrite( 14, LOW);
-    digitalWrite( 15, HIGH); 
-    digitalWrite( 16, HIGH);
-    digitalWrite( 17, LOW);
-    for(int i=18; i<=28; i++){
+  if (min==31) {
+    digitalWrite( 22, LOW);
+    digitalWrite( 23, HIGH);
+    digitalWrite( 24, HIGH);
+    digitalWrite( 25, LOW);
+    digitalWrite( 26, HIGH);
+    digitalWrite( 27, HIGH);
+    digitalWrite( 28, LOW);
+    digitalWrite( 29, HIGH);
+    digitalWrite( 30, HIGH);
+    digitalWrite( 31, LOW);
+    digitalWrite( 32, HIGH);
+    digitalWrite( 33, HIGH);
+    digitalWrite( 34, LOW);
+    for(int i=35; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
-  if (min=="33") {
-    for(int i=2; i<=7; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 8, LOW);
-    digitalWrite( 9, HIGH);
-    digitalWrite( 10, HIGH);
-    digitalWrite( 11, LOW);
-    digitalWrite( 12, HIGH);
-    digitalWrite( 13, HIGH);
-    digitalWrite( 14, LOW);
-    digitalWrite( 15, HIGH); 
-    digitalWrite( 16, HIGH);
-    digitalWrite( 17, LOW);
-    digitalWrite( 18, HIGH);
-    digitalWrite( 19, HIGH);
-    digitalWrite( 20, LOW);
-    for(int i=21; i<=28; i++){
+  if (min==32) {
+    digitalWrite( 22, HIGH);
+    digitalWrite( 23, HIGH);
+    digitalWrite( 24, HIGH);
+    digitalWrite( 25, LOW);
+    digitalWrite( 26, HIGH);
+    digitalWrite( 27, HIGH);
+    digitalWrite( 28, LOW);
+    digitalWrite( 29, HIGH);
+    digitalWrite( 30, HIGH);
+    digitalWrite( 31, LOW);
+    digitalWrite( 32, HIGH);
+    digitalWrite( 33, HIGH);
+    digitalWrite( 34, LOW);
+    digitalWrite( 35, HIGH); 
+    digitalWrite( 36, HIGH);
+    digitalWrite( 37, LOW);
+    for(int i=38; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
-  if (min=="34") {
-    for(int i=2; i<=10; i++){
+  if (min==33) {
+    for(int i=22; i<=27; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 11, LOW);
-    digitalWrite( 12, HIGH);
-    digitalWrite( 13, HIGH);
-    digitalWrite( 14, LOW);
-    digitalWrite( 15, HIGH); 
-    digitalWrite( 16, HIGH);
-    digitalWrite( 17, LOW);
-    digitalWrite( 18, HIGH);
-    digitalWrite( 19, HIGH);
-    digitalWrite( 20, LOW);
-    digitalWrite( 21, HIGH);
+    digitalWrite( 28, LOW);
+    digitalWrite( 29, HIGH);
+    digitalWrite( 30, HIGH);
+    digitalWrite( 31, LOW);
+    digitalWrite( 32, HIGH);
+    digitalWrite( 33, HIGH);
+    digitalWrite( 34, LOW);
+    digitalWrite( 35, HIGH); 
+    digitalWrite( 36, HIGH);
+    digitalWrite( 37, LOW);
+    digitalWrite( 38, HIGH);
+    digitalWrite( 39, HIGH);
+    digitalWrite( 40, LOW);
+    for(int i=41; i<=48; i++){
+      digitalWrite( i, HIGH);
+    }
+  }
+if (min==34) {
+    for(int i=22; i<=30; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 31, LOW);
+    digitalWrite( 32, HIGH);
+    digitalWrite( 33, HIGH);
+    digitalWrite( 34, LOW);
+    digitalWrite( 35, HIGH); 
+    digitalWrite( 36, HIGH);
+    digitalWrite( 37, LOW);
+    digitalWrite( 38, HIGH);
+    digitalWrite( 39, HIGH);
+    digitalWrite( 40, LOW);
+    digitalWrite( 41, HIGH);
+    digitalWrite( 42, HIGH);
+    digitalWrite( 43, LOW);
+    for(int i=44; i<=48; i++){
+      digitalWrite( i, HIGH);
+    }
+  }
+  if (min==35) {
+    for(int i=22; i<=33; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 34, LOW);
+    digitalWrite( 35, HIGH); 
+    digitalWrite( 36, HIGH);
+    digitalWrite( 37, LOW);
+    digitalWrite( 38, HIGH);
+    digitalWrite( 39, HIGH);
+    digitalWrite( 40, LOW);
+    digitalWrite( 41, HIGH);
+    digitalWrite( 42, HIGH);
+    digitalWrite( 43, LOW);
+    digitalWrite( 44, HIGH);
+    digitalWrite( 45, HIGH);
+    digitalWrite( 46, LOW);
+    digitalWrite( 47, HIGH);
+    digitalWrite( 48, HIGH);
+  }
+  if (min==36) {
     digitalWrite( 22, HIGH);
     digitalWrite( 23, LOW);
-    for(int i=24; i<=28; i++){
+    digitalWrite( 24, LOW);
+    for(int i=25; i<=36; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 37, LOW);
+    digitalWrite( 38, HIGH);
+    digitalWrite( 39, HIGH);
+    digitalWrite( 40, LOW);
+    digitalWrite( 41, HIGH);
+    digitalWrite( 42, HIGH);
+    digitalWrite( 43, LOW);
+    digitalWrite( 44, HIGH);
+    digitalWrite( 45, HIGH);
+    digitalWrite( 46, LOW);
+    digitalWrite( 47, HIGH);
+    digitalWrite( 48, HIGH);
+  }
+  if (min==37) {
+    digitalWrite( 22, HIGH);
+    digitalWrite( 23, LOW);
+    digitalWrite( 24, LOW);
+    digitalWrite( 25, HIGH);
+    digitalWrite( 26, LOW);
+    digitalWrite( 27, LOW);
+    for(int i=28; i<=39; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 40, LOW);
+    digitalWrite( 41, HIGH);
+    digitalWrite( 42, HIGH);
+    digitalWrite( 43, LOW);
+    digitalWrite( 44, HIGH);
+    digitalWrite( 45, HIGH);
+    digitalWrite( 46, LOW);
+    digitalWrite( 47, HIGH);
+    digitalWrite( 48, HIGH);
+  }
+  if (min==38) {
+    digitalWrite( 22, HIGH);
+    digitalWrite( 23, LOW);
+    digitalWrite( 24, LOW);
+    digitalWrite( 25, HIGH);
+    digitalWrite( 26, LOW);
+    digitalWrite( 27, LOW);
+    digitalWrite( 28, HIGH);
+    digitalWrite( 29, LOW);
+    digitalWrite( 30, LOW);
+    for(int i=31; i<=42; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 43, LOW);
+    digitalWrite( 44, HIGH);
+    digitalWrite( 45, HIGH);
+    digitalWrite( 46, LOW);
+    digitalWrite( 47, HIGH);
+    digitalWrite( 48, HIGH);
+  }
+  if (min==39) {
+    digitalWrite( 22, HIGH);
+    digitalWrite( 23, LOW);
+    digitalWrite( 24, LOW);
+    digitalWrite( 25, HIGH);
+    digitalWrite( 26, LOW);
+    digitalWrite( 27, LOW);
+    digitalWrite( 28, HIGH);
+    digitalWrite( 29, LOW);
+    digitalWrite( 30, LOW);
+    digitalWrite( 31, HIGH);
+    digitalWrite( 32, LOW);
+    digitalWrite( 33, LOW);
+    for(int i=34; i<=45; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 46, LOW);
+    digitalWrite( 47, HIGH);
+    digitalWrite( 48, HIGH);
+  }
+  if (min==40) {
+    digitalWrite( 22, HIGH);
+    digitalWrite( 23, LOW);
+    digitalWrite( 24, LOW);
+    digitalWrite( 25, HIGH);
+    digitalWrite( 26, LOW);
+    digitalWrite( 27, LOW);
+    digitalWrite( 28, HIGH);
+    digitalWrite( 29, LOW);
+    digitalWrite( 30, LOW);
+    digitalWrite( 31, HIGH);
+    digitalWrite( 32, LOW);
+    digitalWrite( 33, LOW);
+    digitalWrite( 34, HIGH);
+    digitalWrite( 35, LOW); 
+    digitalWrite( 36, LOW);
+    for(int i=37; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
-  if (min=="35") {
-    for(int i=2; i<=13; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 14, LOW);
-    digitalWrite( 15, HIGH); 
-    digitalWrite( 16, HIGH);
-    digitalWrite( 17, LOW);
-    digitalWrite( 18, HIGH);
-    digitalWrite( 19, HIGH);
-    digitalWrite( 20, LOW);
-    digitalWrite( 21, HIGH);
+  if (min==41) {
     digitalWrite( 22, HIGH);
-    digitalWrite( 23, LOW);
+    digitalWrite( 23, HIGH);
     digitalWrite( 24, HIGH);
     digitalWrite( 25, HIGH);
     digitalWrite( 26, LOW);
-    digitalWrite( 27, HIGH);
-    digitalWrite( 28, HIGH);
-  }
-  if (min=="36") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, LOW);
-    digitalWrite( 4, LOW);
-    for(int i=5; i<=16; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 17, LOW);
-    digitalWrite( 18, HIGH);
-    digitalWrite( 19, HIGH);
-    digitalWrite( 20, LOW);
-    digitalWrite( 21, HIGH);
-    digitalWrite( 22, HIGH);
-    digitalWrite( 23, LOW);
-    digitalWrite( 24, HIGH);
-    digitalWrite( 25, HIGH);
-    digitalWrite( 26, LOW);
-    digitalWrite( 27, HIGH);
-    digitalWrite( 28, HIGH);
-  }
-  if (min=="37") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, LOW);
-    digitalWrite( 4, LOW);
-    digitalWrite( 5, HIGH);
-    digitalWrite( 6, LOW);
-    digitalWrite( 7, LOW);
-    for(int i=8; i<=19; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 20, LOW);
-    digitalWrite( 21, HIGH);
-    digitalWrite( 22, HIGH);
-    digitalWrite( 23, LOW);
-    digitalWrite( 24, HIGH);
-    digitalWrite( 25, HIGH);
-    digitalWrite( 26, LOW);
-    digitalWrite( 27, HIGH);
-    digitalWrite( 28, HIGH);
-  }
-  if (min=="38") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, LOW);
-    digitalWrite( 4, LOW);
-    digitalWrite( 5, HIGH);
-    digitalWrite( 6, LOW);
-    digitalWrite( 7, LOW);
-    digitalWrite( 8, HIGH);
-    digitalWrite( 9, LOW);
-    digitalWrite( 10, LOW);
-    for(int i=11; i<=22; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 23, LOW);
-    digitalWrite( 24, HIGH);
-    digitalWrite( 25, HIGH);
-    digitalWrite( 26, LOW);
-    digitalWrite( 27, HIGH);
-    digitalWrite( 28, HIGH);
-  }
-  if (min=="39") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, LOW);
-    digitalWrite( 4, LOW);
-    digitalWrite( 5, HIGH);
-    digitalWrite( 6, LOW);
-    digitalWrite( 7, LOW);
-    digitalWrite( 8, HIGH);
-    digitalWrite( 9, LOW);
-    digitalWrite( 10, LOW);
-    digitalWrite( 11, HIGH);
-    digitalWrite( 12, LOW);
-    digitalWrite( 13, LOW);
-    for(int i=14; i<=25; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 26, LOW);
-    digitalWrite( 27, HIGH);
-    digitalWrite( 28, HIGH);
-  }
-  if (min=="40") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, LOW);
-    digitalWrite( 4, LOW);
-    digitalWrite( 5, HIGH);
-    digitalWrite( 6, LOW);
-    digitalWrite( 7, LOW);
-    digitalWrite( 8, HIGH);
-    digitalWrite( 9, LOW);
-    digitalWrite( 10, LOW);
-    digitalWrite( 11, HIGH);
-    digitalWrite( 12, LOW);
-    digitalWrite( 13, LOW);
-    digitalWrite( 14, HIGH);
-    digitalWrite( 15, LOW); 
-    digitalWrite( 16, LOW);
-    for(int i=17; i<=28; i++){
-      digitalWrite( i, HIGH);
-    }
-  }
-  if (min=="41") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, HIGH);
-    digitalWrite( 6, LOW);
-    digitalWrite( 7, LOW);
-    digitalWrite( 8, HIGH);
-    digitalWrite( 9, LOW);
-    digitalWrite( 10, LOW);
-    digitalWrite( 11, HIGH);
-    digitalWrite( 12, LOW);
-    digitalWrite( 13, LOW);
-    digitalWrite( 14, HIGH);
-    digitalWrite( 15, LOW); 
-    digitalWrite( 16, LOW);
-    digitalWrite( 17, HIGH);
-    digitalWrite( 18, LOW);
-    digitalWrite( 19, LOW);
-    for(int i=20; i<=28; i++){
-      digitalWrite( i, HIGH);
-    }
-  }
-  if (min=="42") {
-    for(int i=2; i<=8; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 9, LOW);
-    digitalWrite( 10, LOW);
-    digitalWrite( 11, HIGH);
-    digitalWrite( 12, LOW);
-    digitalWrite( 13, LOW);
-    digitalWrite( 14, HIGH);
-    digitalWrite( 15, LOW); 
-    digitalWrite( 16, LOW);
-    digitalWrite( 17, HIGH);
-    digitalWrite( 18, LOW);
-    digitalWrite( 19, LOW);
-    digitalWrite( 20, HIGH);
-    digitalWrite( 21, LOW);
-    digitalWrite( 22, LOW);
-    for(int i=23; i<=28; i++){
-      digitalWrite( i, HIGH);
-    }
-  }
-  if (min=="43") {
-    for(int i=2; i<=11; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 12, LOW);
-    digitalWrite( 13, LOW);
-    digitalWrite( 14, HIGH);
-    digitalWrite( 15, LOW); 
-    digitalWrite( 16, LOW);
-    digitalWrite( 17, HIGH);
-    digitalWrite( 18, LOW);
-    digitalWrite( 19, LOW);
-    digitalWrite( 20, HIGH);
-    digitalWrite( 21, LOW);
-    digitalWrite( 22, LOW);
-    digitalWrite( 23, HIGH);
-    digitalWrite( 24, LOW);
-    digitalWrite( 25, LOW);
-    digitalWrite( 26, HIGH);
-    digitalWrite( 27, HIGH);
-    digitalWrite( 28, HIGH);
-  }
-  if (min=="44") {
-    for(int i=2; i<=14; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 15, LOW); 
-    digitalWrite( 16, LOW);
-    digitalWrite( 17, HIGH);
-    digitalWrite( 18, LOW);
-    digitalWrite( 19, LOW);
-    digitalWrite( 20, HIGH);
-    digitalWrite( 21, LOW);
-    digitalWrite( 22, LOW);
-    digitalWrite( 23, HIGH);
-    digitalWrite( 24, LOW);
-    digitalWrite( 25, LOW);
-    digitalWrite( 26, HIGH);
     digitalWrite( 27, LOW);
-    digitalWrite( 28, LOW);
-  }
-  if (min=="45") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, LOW);
-    for(int i=4; i<=17; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 18, LOW);
-    digitalWrite( 19, LOW);
-    digitalWrite( 20, HIGH);
-    digitalWrite( 21, LOW);
-    digitalWrite( 22, LOW);
-    digitalWrite( 23, HIGH);
-    digitalWrite( 24, LOW);
-    digitalWrite( 25, LOW);
-    digitalWrite( 26, HIGH);
-    digitalWrite( 27, LOW);
-    digitalWrite( 28, LOW);
-  }
-  if (min=="46") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, LOW);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, HIGH);
-    digitalWrite( 6, LOW);
-    for(int i=7; i<=20; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 21, LOW);
-    digitalWrite( 22, LOW);
-    digitalWrite( 23, HIGH);
-    digitalWrite( 24, LOW);
-    digitalWrite( 25, LOW);
-    digitalWrite( 26, HIGH);
-    digitalWrite( 27, LOW);
-    digitalWrite( 28, LOW);
-  }
-  if (min=="47") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, LOW);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, HIGH);
-    digitalWrite( 6, LOW);
-    digitalWrite( 7, HIGH);
-    digitalWrite( 8, HIGH);
-    digitalWrite( 9, LOW);
-    for(int i=10; i<=23; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 24, LOW);
-    digitalWrite( 25, LOW);
-    digitalWrite( 26, HIGH);
-    digitalWrite( 27, LOW);
-    digitalWrite( 28, LOW);
-  }
-  if (min=="48") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, LOW);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, HIGH);
-    digitalWrite( 6, LOW);
-    digitalWrite( 7, HIGH);
-    digitalWrite( 8, HIGH);
-    digitalWrite( 9, LOW);
-    digitalWrite( 10, HIGH);
-    digitalWrite( 11, HIGH);
-    digitalWrite( 12, LOW);
-    for(int i=13; i<=26; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 27, LOW);
-    digitalWrite( 28, LOW);
-  }
-  if (min=="49") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, LOW);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, HIGH);
-    digitalWrite( 6, LOW);
-    digitalWrite( 7, HIGH);
-    digitalWrite( 8, HIGH);
-    digitalWrite( 9, LOW);
-    digitalWrite( 10, HIGH);
-    digitalWrite( 11, HIGH);
-    digitalWrite( 12, LOW);
-    digitalWrite( 13, HIGH);
-    digitalWrite( 14, HIGH);
-    digitalWrite( 15, LOW);
-    for(int i=16; i<=28; i++){
-      digitalWrite( i, HIGH);
-    } 
-  }
-  if (min=="50") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, HIGH);
-    digitalWrite( 5, HIGH);
-    digitalWrite( 6, LOW);
-    digitalWrite( 7, HIGH);
-    digitalWrite( 8, HIGH);
-    digitalWrite( 9, LOW);
-    digitalWrite( 10, HIGH);
-    digitalWrite( 11, HIGH);
-    digitalWrite( 12, LOW);
-    digitalWrite( 13, HIGH);
-    digitalWrite( 14, HIGH);
-    digitalWrite( 15, LOW); 
-    digitalWrite( 16, HIGH);
-    digitalWrite( 17, HIGH);
-    digitalWrite( 18, LOW);
-    for(int i=19; i<=28; i++){
+    digitalWrite( 28, HIGH);
+    digitalWrite( 29, LOW);
+    digitalWrite( 30, LOW);
+    digitalWrite( 31, HIGH);
+    digitalWrite( 32, LOW);
+    digitalWrite( 33, LOW);
+    digitalWrite( 34, HIGH);
+    digitalWrite( 35, LOW); 
+    digitalWrite( 36, LOW);
+    digitalWrite( 37, HIGH);
+    digitalWrite( 38, LOW);
+    digitalWrite( 39, LOW);
+    for(int i=40; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
-  if (min=="51") {
-    for(int i=2; i<=8; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 9, LOW);
-    digitalWrite( 10, HIGH);
-    digitalWrite( 11, HIGH);
-    digitalWrite( 12, LOW);
-    digitalWrite( 13, HIGH);
-    digitalWrite( 14, HIGH);
-    digitalWrite( 15, LOW); 
-    digitalWrite( 16, HIGH);
-    digitalWrite( 17, HIGH);
-    digitalWrite( 18, LOW);
-    digitalWrite( 19, HIGH);
-    digitalWrite( 20, HIGH);
-    digitalWrite( 21, LOW);
+  if (min==42) {
     for(int i=22; i<=28; i++){
       digitalWrite( i, HIGH);
     }
-  }
-  if (min=="52") {
-    for(int i=2; i<=11; i++){
+    digitalWrite( 29, LOW);
+    digitalWrite( 30, LOW);
+    digitalWrite( 31, HIGH);
+    digitalWrite( 32, LOW);
+    digitalWrite( 33, LOW);
+    digitalWrite( 34, HIGH);
+    digitalWrite( 35, LOW); 
+    digitalWrite( 36, LOW);
+    digitalWrite( 37, HIGH);
+    digitalWrite( 38, LOW);
+    digitalWrite( 39, LOW);
+    digitalWrite( 30, HIGH);
+    digitalWrite( 41, LOW);
+    digitalWrite( 42, LOW);
+    for(int i=43; i<=48; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 12, LOW);
-    digitalWrite( 13, HIGH);
-    digitalWrite( 14, HIGH);
-    digitalWrite( 15, LOW); 
-    digitalWrite( 16, HIGH);
-    digitalWrite( 17, HIGH);
-    digitalWrite( 18, LOW);
-    digitalWrite( 19, HIGH);
-    digitalWrite( 20, HIGH);
-    digitalWrite( 21, LOW);
+  }
+  if (min==43) {
+    for(int i=22; i<=31; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 32, LOW);
+    digitalWrite( 33, LOW);
+    digitalWrite( 34, HIGH);
+    digitalWrite( 35, LOW); 
+    digitalWrite( 36, LOW);
+    digitalWrite( 37, HIGH);
+    digitalWrite( 38, LOW);
+    digitalWrite( 39, LOW);
+    digitalWrite( 40, HIGH);
+    digitalWrite( 41, LOW);
+    digitalWrite( 42, LOW);
+    digitalWrite( 43, HIGH);
+    digitalWrite( 44, LOW);
+    digitalWrite( 45, LOW);
+    digitalWrite( 46, HIGH);
+    digitalWrite( 47, HIGH);
+    digitalWrite( 48, HIGH);
+  }
+  if (min==44) {
+    for(int i=22; i<=34; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 35, LOW); 
+    digitalWrite( 36, LOW);
+    digitalWrite( 37, HIGH);
+    digitalWrite( 38, LOW);
+    digitalWrite( 39, LOW);
+    digitalWrite( 40, HIGH);
+    digitalWrite( 41, LOW);
+    digitalWrite( 42, LOW);
+    digitalWrite( 43, HIGH);
+    digitalWrite( 44, LOW);
+    digitalWrite( 45, LOW);
+    digitalWrite( 46, HIGH);
+    digitalWrite( 47, LOW);
+    digitalWrite( 48, LOW);
+  }
+  if (min==45) {
     digitalWrite( 22, HIGH);
-    digitalWrite( 23, HIGH);
-    digitalWrite( 24, LOW);
+    digitalWrite( 23, LOW);
+    for(int i=24; i<=37; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 38, LOW);
+    digitalWrite( 39, LOW);
+    digitalWrite( 40, HIGH);
+    digitalWrite( 41, LOW);
+    digitalWrite( 42, LOW);
+    digitalWrite( 43, HIGH);
+    digitalWrite( 44, LOW);
+    digitalWrite( 45, LOW);
+    digitalWrite( 46, HIGH);
+    digitalWrite( 47, LOW);
+    digitalWrite( 48, LOW);
+  }
+  if (min==46) {
+    digitalWrite( 22, HIGH);
+    digitalWrite( 23, LOW);
+    digitalWrite( 24, HIGH);
     digitalWrite( 25, HIGH);
-    digitalWrite( 26, HIGH);
+    digitalWrite( 26, LOW);
+    for(int i=27; i<=40; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 41, LOW);
+    digitalWrite( 42, LOW);
+    digitalWrite( 43, HIGH);
+    digitalWrite( 44, LOW);
+    digitalWrite( 45, LOW);
+    digitalWrite( 46, HIGH);
+    digitalWrite( 47, LOW);
+    digitalWrite( 48, LOW);
+  }
+  if (min==47) {
+    digitalWrite( 22, HIGH);
+    digitalWrite( 23, LOW);
+    digitalWrite( 24, HIGH);
+    digitalWrite( 25, HIGH);
+    digitalWrite( 26, LOW);
     digitalWrite( 27, HIGH);
     digitalWrite( 28, HIGH);
-  }
-  if (min=="53") {
-    for(int i=2; i<=14; i++){
+    digitalWrite( 29, LOW);
+    for(int i=30; i<=43; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 15, LOW); 
-    digitalWrite( 16, HIGH);
-    digitalWrite( 17, HIGH);
-    digitalWrite( 18, LOW);
-    digitalWrite( 19, HIGH);
-    digitalWrite( 20, HIGH);
-    digitalWrite( 21, LOW);
+    digitalWrite( 44, LOW);
+    digitalWrite( 45, LOW);
+    digitalWrite( 46, HIGH);
+    digitalWrite( 47, LOW);
+    digitalWrite( 48, LOW);
+  }
+  if (min==48) {
+    digitalWrite( 22, HIGH);
+    digitalWrite( 23, LOW);
+    digitalWrite( 24, HIGH);
+    digitalWrite( 25, HIGH);
+    digitalWrite( 26, LOW);
+    digitalWrite( 27, HIGH);
+    digitalWrite( 28, HIGH);
+    digitalWrite( 29, LOW);
+    digitalWrite( 30, HIGH);
+    digitalWrite( 31, HIGH);
+    digitalWrite( 32, LOW);
+    for(int i=33; i<=46; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 47, LOW);
+    digitalWrite( 48, LOW);
+  }
+  if (min==49) {
+    digitalWrite( 22, HIGH);
+    digitalWrite( 23, LOW);
+    digitalWrite( 24, HIGH);
+    digitalWrite( 25, HIGH);
+    digitalWrite( 26, LOW);
+    digitalWrite( 27, HIGH);
+    digitalWrite( 28, HIGH);
+    digitalWrite( 29, LOW);
+    digitalWrite( 30, HIGH);
+    digitalWrite( 31, HIGH);
+    digitalWrite( 32, LOW);
+    digitalWrite( 33, HIGH);
+    digitalWrite( 34, HIGH);
+    digitalWrite( 35, LOW);
+    for(int i=36; i<=48; i++){
+      digitalWrite( i, HIGH);
+    } 
+  }
+  if (min==50) {
+    digitalWrite( 22, HIGH);
+    digitalWrite( 23, HIGH);
+    digitalWrite( 24, HIGH);
+    digitalWrite( 25, HIGH);
+    digitalWrite( 26, LOW);
+    digitalWrite( 27, HIGH);
+    digitalWrite( 28, HIGH);
+    digitalWrite( 29, LOW);
+    digitalWrite( 30, HIGH);
+    digitalWrite( 31, HIGH);
+    digitalWrite( 32, LOW);
+    digitalWrite( 33, HIGH);
+    digitalWrite( 34, HIGH);
+    digitalWrite( 35, LOW); 
+    digitalWrite( 36, HIGH);
+    digitalWrite( 37, HIGH);
+    digitalWrite( 38, LOW);
+    for(int i=39; i<=48; i++){
+      digitalWrite( i, HIGH);
+    }
+  }
+  if (min==51) {
+    for(int i=22; i<=28; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 29, LOW);
+    digitalWrite( 30, HIGH);
+    digitalWrite( 31, HIGH);
+    digitalWrite( 32, LOW);
+    digitalWrite( 33, HIGH);
+    digitalWrite( 34, HIGH);
+    digitalWrite( 35, LOW); 
+    digitalWrite( 36, HIGH);
+    digitalWrite( 37, HIGH);
+    digitalWrite( 38, LOW);
+    digitalWrite( 39, HIGH);
+    digitalWrite( 40, HIGH);
+    digitalWrite( 41, LOW);
+    for(int i=42; i<=48; i++){
+      digitalWrite( i, HIGH);
+    }
+  }
+  if (min==52) {
+    for(int i=22; i<=31; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 32, LOW);
+    digitalWrite( 33, HIGH);
+    digitalWrite( 34, HIGH);
+    digitalWrite( 35, LOW); 
+    digitalWrite( 36, HIGH);
+    digitalWrite( 37, HIGH);
+    digitalWrite( 38, LOW);
+    digitalWrite( 39, HIGH);
+    digitalWrite( 40, HIGH);
+    digitalWrite( 41, LOW);
+    digitalWrite( 42, HIGH);
+    digitalWrite( 43, HIGH);
+    digitalWrite( 44, LOW);
+    digitalWrite( 45, HIGH);
+    digitalWrite( 46, HIGH);
+    digitalWrite( 47, HIGH);
+    digitalWrite( 48, HIGH);
+  }
+  if (min==53) {
+    for(int i=22; i<=34; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 35, LOW); 
+    digitalWrite( 36, HIGH);
+    digitalWrite( 37, HIGH);
+    digitalWrite( 38, LOW);
+    digitalWrite( 39, HIGH);
+    digitalWrite( 40, HIGH);
+    digitalWrite( 41, LOW);
+    digitalWrite( 42, HIGH);
+    digitalWrite( 43, HIGH);
+    digitalWrite( 44, LOW);
+    digitalWrite( 45, HIGH);
+    digitalWrite( 46, HIGH);
+    digitalWrite( 47, LOW);
+    digitalWrite( 48, HIGH);
+  }
+  if (min==54) {
+    digitalWrite( 22, HIGH);
+    digitalWrite( 23, HIGH);
+    digitalWrite( 24, LOW);
+    for(int i=25; i<=37; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 38, LOW);
+    digitalWrite( 39, HIGH);
+    digitalWrite( 40, HIGH);
+    digitalWrite( 41, LOW);
+    digitalWrite( 42, HIGH);
+    digitalWrite( 43, HIGH);
+    digitalWrite( 44, LOW);
+    digitalWrite( 45, HIGH);
+    digitalWrite( 46, HIGH);
+    digitalWrite( 47, LOW);
+    digitalWrite( 48, HIGH);
+  }
+  if (min==55) {
+    digitalWrite( 22, HIGH);
+    digitalWrite( 23, HIGH);
+    digitalWrite( 24, LOW);
+    digitalWrite( 25, HIGH);
+    digitalWrite( 26, HIGH);
+    digitalWrite( 27, LOW);
+    for(int i=28; i<=40; i++){
+      digitalWrite( i, HIGH);
+    }
+    digitalWrite( 41, LOW);
+    digitalWrite( 42, HIGH);
+    digitalWrite( 43, HIGH);
+    digitalWrite( 44, LOW);
+    digitalWrite( 45, HIGH);
+    digitalWrite( 46, HIGH);
+    digitalWrite( 47, LOW);
+    digitalWrite( 48, HIGH);
+  }
+  if (min==56) {
     digitalWrite( 22, HIGH);
     digitalWrite( 23, HIGH);
     digitalWrite( 24, LOW);
@@ -2481,18 +2523,18 @@ pin 26 27 28 DMUX9
     digitalWrite( 26, HIGH);
     digitalWrite( 27, LOW);
     digitalWrite( 28, HIGH);
-  }
-  if (min=="54") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, LOW);
-    for(int i=5; i<=17; i++){
+    digitalWrite( 29, HIGH);
+    digitalWrite( 30, LOW);
+    for(int i=31; i<=43; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 18, LOW);
-    digitalWrite( 19, HIGH);
-    digitalWrite( 20, HIGH);
-    digitalWrite( 21, LOW);
+    digitalWrite( 44, LOW);
+    digitalWrite( 45, HIGH);
+    digitalWrite( 46, HIGH);
+    digitalWrite( 47, LOW);
+    digitalWrite( 48, HIGH);
+  }
+  if (min==57) {
     digitalWrite( 22, HIGH);
     digitalWrite( 23, HIGH);
     digitalWrite( 24, LOW);
@@ -2500,18 +2542,18 @@ pin 26 27 28 DMUX9
     digitalWrite( 26, HIGH);
     digitalWrite( 27, LOW);
     digitalWrite( 28, HIGH);
-  }
-  if (min=="55") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, LOW);
-    digitalWrite( 5, HIGH);
-    digitalWrite( 6, HIGH);
-    digitalWrite( 7, LOW);
-    for(int i=8; i<=20; i++){
+    digitalWrite( 29, HIGH);
+    digitalWrite( 30, LOW);
+    digitalWrite( 31, HIGH);
+    digitalWrite( 32, HIGH);
+    digitalWrite( 33, LOW);
+    for(int i=34; i<=46; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 21, LOW);
+    digitalWrite( 47, LOW);
+    digitalWrite( 48, HIGH);
+  }
+  if (min==58) {
     digitalWrite( 22, HIGH);
     digitalWrite( 23, HIGH);
     digitalWrite( 24, LOW);
@@ -2519,84 +2561,37 @@ pin 26 27 28 DMUX9
     digitalWrite( 26, HIGH);
     digitalWrite( 27, LOW);
     digitalWrite( 28, HIGH);
-  }
-  if (min=="56") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, LOW);
-    digitalWrite( 5, HIGH);
-    digitalWrite( 6, HIGH);
-    digitalWrite( 7, LOW);
-    digitalWrite( 8, HIGH);
-    digitalWrite( 9, HIGH);
-    digitalWrite( 10, LOW);
-    for(int i=11; i<=23; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 24, LOW);
-    digitalWrite( 25, HIGH);
-    digitalWrite( 26, HIGH);
-    digitalWrite( 27, LOW);
-    digitalWrite( 28, HIGH);
-  }
-  if (min=="57") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, LOW);
-    digitalWrite( 5, HIGH);
-    digitalWrite( 6, HIGH);
-    digitalWrite( 7, LOW);
-    digitalWrite( 8, HIGH);
-    digitalWrite( 9, HIGH);
-    digitalWrite( 10, LOW);
-    digitalWrite( 11, HIGH);
-    digitalWrite( 12, HIGH);
-    digitalWrite( 13, LOW);
-    for(int i=14; i<=26; i++){
-      digitalWrite( i, HIGH);
-    }
-    digitalWrite( 27, LOW);
-    digitalWrite( 28, HIGH);
-  }
-  if (min=="58") {
-    digitalWrite( 2, HIGH);
-    digitalWrite( 3, HIGH);
-    digitalWrite( 4, LOW);
-    digitalWrite( 5, HIGH);
-    digitalWrite( 6, HIGH);
-    digitalWrite( 7, LOW);
-    digitalWrite( 8, HIGH);
-    digitalWrite( 9, HIGH);
-    digitalWrite( 10, LOW);
-    digitalWrite( 11, HIGH);
-    digitalWrite( 12, HIGH);
-    digitalWrite( 13, LOW);
-    digitalWrite( 14, HIGH);
-    digitalWrite( 15, HIGH); 
-    digitalWrite( 16, LOW);
-    for(int i=17; i<=28; i++){
+    digitalWrite( 29, HIGH);
+    digitalWrite( 30, LOW);
+    digitalWrite( 31, HIGH);
+    digitalWrite( 32, HIGH);
+    digitalWrite( 33, LOW);
+    digitalWrite( 34, HIGH);
+    digitalWrite( 35, HIGH); 
+    digitalWrite( 36, LOW);
+    for(int i=37; i<=48; i++){
       digitalWrite( i, HIGH);
     }
 
   }
-  if (min=="59") {
-    for(int i=2; i<=6; i++){
+  if (min==59) {
+    for(int i=22; i<=26; i++){
       digitalWrite( i, HIGH);
     }
-    digitalWrite( 7, LOW);
-    digitalWrite( 8, HIGH);
-    digitalWrite( 9, HIGH);
-    digitalWrite( 10, LOW);
-    digitalWrite( 11, HIGH);
-    digitalWrite( 12, HIGH);
-    digitalWrite( 13, LOW);
-    digitalWrite( 14, HIGH);
-    digitalWrite( 15, HIGH); 
-    digitalWrite( 16, LOW);
-    digitalWrite( 17, HIGH);
-    digitalWrite( 18, HIGH);
-    digitalWrite( 19, LOW);
-    for(int i=20; i<=28; i++){
+    digitalWrite( 27, LOW);
+    digitalWrite( 28, HIGH);
+    digitalWrite( 29, HIGH);
+    digitalWrite( 20, LOW);
+    digitalWrite( 31, HIGH);
+    digitalWrite( 32, HIGH);
+    digitalWrite( 33, LOW);
+    digitalWrite( 34, HIGH);
+    digitalWrite( 35, HIGH); 
+    digitalWrite( 36, LOW);
+    digitalWrite( 37, HIGH);
+    digitalWrite( 38, HIGH);
+    digitalWrite( 39, LOW);
+    for(int i=40; i<=48; i++){
       digitalWrite( i, HIGH);
     }
   }
